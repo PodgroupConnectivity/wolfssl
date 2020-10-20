@@ -6,6 +6,17 @@
 #error This user_settings.h header is only designed for Windows
 #endif
 
+//    #define NO_RSA
+//    #define WOLFSSL_TLS13
+//    #define NO_OLD_TLS
+//    #define WOLFSSL_NO_TLS12
+//    #define NO_DH
+//    #define HAVE_HKDF
+//    #define WOLFSSL_NO_SERVER_GROUPS_EXT
+    #define PSK_ONLY
+
+    #define BUILD_TLS_AES_128_CCM_SHA256
+
 /* Configurations */
 #if defined(HAVE_FIPS)
     /* FIPS */
@@ -31,23 +42,24 @@
 
     #if defined(WOLFSSL_LIB)
         /* The lib */
-        #define OPENSSL_EXTRA
-        #define WOLFSSL_RIPEMD
-        #define NO_PSK
+        //#define OPENSSL_EXTRA
+        //#define WOLFSSL_RIPEMD
+        //#define NO_PSK
         #define HAVE_EXTENDED_MASTER
         #define WOLFSSL_SNIFFER
+
         #define HAVE_SECURE_RENEGOTIATION
 
-        #define HAVE_AESGCM
-        #define WOLFSSL_SHA384
-        #define WOLFSSL_SHA512
+        //#define HAVE_AESGCM
+        //#define WOLFSSL_SHA384
+        //#define WOLFSSL_SHA512
 
-        #define HAVE_SUPPORTED_CURVES
+        //#define HAVE_SUPPORTED_CURVES
         #define HAVE_TLS_EXTENSIONS
 
-        #define HAVE_ECC
-        #define ECC_SHAMIR
-        #define ECC_TIMING_RESISTANT
+        //#define HAVE_ECC
+        //#define ECC_SHAMIR
+        //#define ECC_TIMING_RESISTANT
 
         /* Optional Performance Speedups */
         #if 0
@@ -66,8 +78,8 @@
 
     #else
         /* The servers and clients */
-        #define OPENSSL_EXTRA
-        #define NO_PSK
+        //#define OPENSSL_EXTRA
+        //#define NO_PSK
     #endif
 #endif /* HAVE_FIPS */
 

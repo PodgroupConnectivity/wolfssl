@@ -1453,31 +1453,41 @@ static WC_INLINE unsigned int my_psk_client_tls13_cb(WOLFSSL* ssl,
     return 32;   /* length of key in octets or 0 for error */
 }
 
+#define LEN_PSK_KEY  0x10
+const unsigned char TEST_PSK[LEN_PSK_KEY] = {
+    0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f };
 
 static WC_INLINE unsigned int my_psk_server_tls13_cb(WOLFSSL* ssl,
         const char* identity, unsigned char* key, unsigned int key_max_len,
         const char** ciphersuite)
 {
     int i;
-    int b = 0x01;
-    const char* userCipher = (const char*)wolfSSL_get_psk_callback_ctx(ssl);
+    //int b = 0x01;
+    //const char* userCipher = (const char*)wolfSSL_get_psk_callback_ctx(ssl);
 
     (void)ssl;
     (void)key_max_len;
 
     /* see internal.h MAX_PSK_ID_LEN for PSK identity limit */
-    if (XSTRNCMP(identity, kIdentityStr, XSTRLEN(kIdentityStr)) != 0)
-        return 0;
+//    if (strncmp(identity, kIdentityStr, strlen(kIdentityStr)) != 0)
+//        return 0;
 
-    for (i = 0; i < 32; i++, b += 0x22) {
-        if (b >= 0x100)
-            b = 0x01;
-        key[i] = b;
+    for (i = 0; i < LEN_PSK_KEY; i++) {
+        key[i] = TEST_PSK[i];
     }
+    //#if defined(LITTLE_ENDIAN_ORDER) && !defined(FREESCALE_MMCAU_SHA)
+    //#if defined(HAVE_INTEL_AVX1) || defined(HAVE_INTEL_AVX2)
+    //    if (!IS_INTEL_AVX1(intel_flags) && !IS_INTEL_AVX2(intel_flags))
+    //#endif
+    //    {
+    //        ByteReverseWords(key, key, WC_SHA256_BLOCK_SIZE);
+    //    }
+    //#endif
+    *ciphersuite = "TLS13-AES128-CCM-SHA256";
 
-    *ciphersuite = userCipher ? userCipher : "TLS13-AES128-GCM-SHA256";
+    //*ciphersuite = userCipher ? userCipher : "TLS13-AES128-GCM-SHA256";
 
-    return 32;   /* length of key in octets or 0 for error */
+    return LEN_PSK_KEY;   /* length of key in octets or 0 for error */
 }
 
 #endif /* !NO_PSK */

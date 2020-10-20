@@ -60,27 +60,27 @@
 
     #if defined(WOLFSSL_LIB)
         /* The lib */
-        #define OPENSSL_EXTRA
-        #define WOLFSSL_RIPEMD
-        #define NO_PSK
-        #define HAVE_EXTENDED_MASTER
+        //#define OPENSSL_EXTRA
+        //#define WOLFSSL_RIPEMD
+        //#define NO_PSK
+        //#define HAVE_EXTENDED_MASTER
         #define WOLFSSL_SNIFFER
         #define HAVE_SECURE_RENEGOTIATION
 
         #define HAVE_AESGCM
-        #define WOLFSSL_SHA384
-        #define WOLFSSL_SHA512
+        //#define WOLFSSL_SHA384
+        //#define WOLFSSL_SHA512
 
-        #define HAVE_SUPPORTED_CURVES
+        //#define HAVE_SUPPORTED_CURVES
         #define HAVE_TLS_EXTENSIONS
 
-        #define HAVE_ECC
-        #define ECC_SHAMIR
-        #define ECC_TIMING_RESISTANT
+        //#define HAVE_ECC
+        //#define ECC_SHAMIR
+        //#define ECC_TIMING_RESISTANT
     #else
         /* The servers and clients */
-        #define OPENSSL_EXTRA
-        #define NO_PSK
+        //#define OPENSSL_EXTRA
+        //#define NO_PSK
     #endif
 #endif /* HAVE_FIPS */
 

@@ -68,7 +68,7 @@
  * by the client. */
 
 #ifndef WOLFSSL_ALT_TEST_STRINGS
-static const char kReplyMsg[] = "I hear you fa shizzle!";
+static const char kReplyMsg[] = "{\"status\": \"OK\"}";
 #else
 static const char kReplyMsg[] = "I hear you fa shizzle!\n";
 #endif
@@ -1811,7 +1811,11 @@ THREAD_RETURN WOLFSSL_THREAD server_test(void* args)
         #elif defined(HAVE_NULL_CIPHER)
                 defaultCipherList = "PSK-NULL-SHA256";
         #else
+            #ifdef WOLFSSL_TLS13
+                defaultCipherList = "TLS13-AES128-CCM-SHA256";
+            #else
                 defaultCipherList = "PSK-AES128-CBC-SHA256";
+            #endif
         #endif
             if (SSL_CTX_set_cipher_list(ctx, defaultCipherList)
                 != WOLFSSL_SUCCESS)

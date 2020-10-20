@@ -3319,7 +3319,11 @@ static int DoPreSharedKeys(WOLFSSL* ssl, const byte* input, word32 helloSz,
         return PSK_KEY_ERROR;
 
     /* Assume we are going to resume with a pre-shared key. */
+#ifdef PSK_ONLY
+    ssl->options.resuming = 0;
+#else
     ssl->options.resuming = 1;
+#endif
 
     /* Find the pre-shared key extension and calculate hash of truncated
      * ClientHello for binders.
@@ -3826,7 +3830,11 @@ int DoTls13ClientHello(WOLFSSL* ssl, const byte* input, word32* inOutIdx,
     word32          i = *inOutIdx;
     word32          begin = i;
     word16          totalExtSz = 0;
+#ifdef PSK_ONLY
+    int             usingPSK = 1;
+#else
     int             usingPSK = 0;
+#endif
     byte            sessIdSz = 0;
     int             wantDowngrade = 0;
 

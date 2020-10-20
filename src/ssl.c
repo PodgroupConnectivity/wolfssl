@@ -43688,6 +43688,7 @@ int wolfSSL_X509_set_ex_data(X509 *x509, int idx, void *data)
 #endif /* OPENSSL_EXTRA || WOLFSSL_WPAS_SMALL */
 
 
+#if defined(OPENSSL_EXTRA)
 #ifndef NO_ASN
 int wolfSSL_X509_check_host(WOLFSSL_X509 *x, const char *chk, size_t chklen,
                     unsigned int flags, char **peername)
@@ -43764,6 +43765,7 @@ int wolfSSL_X509_check_ip_asc(WOLFSSL_X509 *x, const char *ipasc,
 
     return ret;
 }
+#endif
 #endif
 
 #if defined(OPENSSL_ALL) || defined(WOLFSSL_NGINX) || defined(WOLFSSL_HAPROXY) \
