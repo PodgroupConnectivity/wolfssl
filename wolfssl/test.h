@@ -1453,14 +1453,15 @@ static WC_INLINE unsigned int my_psk_client_tls13_cb(WOLFSSL* ssl,
     return 32;   /* length of key in octets or 0 for error */
 }
 
-#define LEN_PSK_KEY  0x10
-const unsigned char TEST_PSK[LEN_PSK_KEY] = {
-    0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f };
 
 static WC_INLINE unsigned int my_psk_server_tls13_cb(WOLFSSL* ssl,
         const char* identity, unsigned char* key, unsigned int key_max_len,
         const char** ciphersuite)
 {
+#define LEN_PSK_KEY  0x10
+    const unsigned char TEST_PSK[LEN_PSK_KEY] = {
+        0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a, 0x4b, 0x4c, 0x4d, 0x4e, 0x4f };
+
     int i;
     //int b = 0x01;
     //const char* userCipher = (const char*)wolfSSL_get_psk_callback_ctx(ssl);
