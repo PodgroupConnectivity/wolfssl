@@ -1467,6 +1467,7 @@ static WC_INLINE unsigned int my_psk_server_tls13_cb(WOLFSSL* ssl,
 
     (void)ssl;
     (void)key_max_len;
+    (void)identity;
 
     /* see internal.h MAX_PSK_ID_LEN for PSK identity limit */
 //    if (strncmp(identity, kIdentityStr, strlen(kIdentityStr)) != 0)
